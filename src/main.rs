@@ -35,6 +35,10 @@ impl SystemTray {
         } else {
             self.tray.set_icon(&self.moon_white);
         }
+        nwg::bind_raw_event_handler(&self.window.handle, 0x1_0000, |hwnd, msg, w, l| {
+            println!("event: {hwnd:?}, {msg:?}, {w:?}, {l:?}");
+            None
+        }).expect("failed to set up event listener");
     }
 
     fn show_menu(&self) {
